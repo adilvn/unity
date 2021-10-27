@@ -42,6 +42,21 @@
                 </li>
                 @endif
 
+                <li class="sidebar-item  has-sub {{ request()->is('admin/career*') ? 'active' : ''}}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-briefcase-fill"></i>
+                        <span>Career</span>
+                    </a>
+                    <ul class="submenu" style="display: {{ request()->is('admin/career*') ? 'block' : 'none'}};">
+                        <li class="submenu-item {{ request()->routeIs('get-careers') ? 'active' : ''}}">
+                            <a href="{{route('get-careers')}}">All Careers</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('add-career') ? 'active' : ''}}">
+                            <a href="{{route('add-career')}}">Add New Career</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="sidebar-item  has-sub {{ request()->is('admin/faqs*') ? 'active' : ''}}">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-patch-question-fill"></i>

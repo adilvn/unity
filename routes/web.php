@@ -5,6 +5,7 @@ use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\About;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\MessageController;
@@ -47,12 +48,21 @@ Route::middleware('adminAuth')->group(function () {
     Route::post('/admin-logout', [adminLoginController::class, 'adminLogout'])->name('admin-logout');
     Route::get('/admin/dashboard', [adminLoginController::class, 'adminDashboard'])->name('admin-dashboard');
 
+    // Career
+    Route::get('/admin/careers', [CareerController::class, 'getCareers'])->name('get-careers');
+    Route::get('/admin/career/add', [CareerController::class, 'addCareer'])->name('add-career');
+    Route::post('/admin/career/save', [CareerController::class, 'saveCareer'])->name('save-career');
+    Route::get('/admin/careers/edit/{id}', [CareerController::class, 'editCareers'])->name('edit-careers');
+    Route::post('/admin/careers/update/{id}', [CareerController::class, 'updateCareer'])->name('update-careers');
+    Route::get('/admin/career/status/{id}', [CareerController::class, 'updateCareerStatus'])->name('update-career-status');
+    Route::get('/admin/career/delete/{id}', [CareerController::class, 'deleteCareer'])->name('delete-career');
+
     //FAQs
     Route::get('/admin/faqs', [FaqsController::class, 'getFaqs'])->name('get-faqs');
     Route::get('/admin/faqs/add', [FaqsController::class, 'addFaq'])->name('add-faq');
     Route::post('/admin/faqs/save', [FaqsController::class, 'saveFaq'])->name('save-faq');
     Route::get('/admin/faqs/edit/{id}', [FaqsController::class, 'editFaq'])->name('edit-faq');
-    Route::post('/admin/faqs/update', [FaqsController::class, 'updateFaq'])->name('update-faq');
+    Route::post('/admin/faqs/update/{id}', [FaqsController::class, 'updateFaq'])->name('update-faq');
     Route::get('/admin/faqs/status/{id}', [FaqsController::class, 'updateFaqStatus'])->name('update-faq-status');
     Route::get('/admin/faqs/delete/{id}', [FaqsController::class, 'deleteFaq'])->name('delete-faq');
 

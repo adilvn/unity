@@ -51,7 +51,7 @@
                                                         <div class="form-group has-icon-left">
                                                             <label for="first-name-column">Username</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="username" id="username-column first-name-icon" class="form-control" placeholder="Enter Username" name="fname-column" value="{{ $user->username ??'' }}">
+                                                                <input type="text" name="username" id="username-column first-name-icon" class="form-control" placeholder="Enter Username" value="{{ $user->username ??'' }}">
                                                                 <div class="form-control-icon">
                                                                     <i class="bi bi-person-badge"></i>
                                                                 </div>
@@ -65,7 +65,7 @@
                                                         <div class="form-group has-icon-left">
                                                             <label for="city-column">First Name</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="fname" id="first-name-column first-name-icon" class="form-control" placeholder="Enter First Name" name="city-column" value="{{ $user->fname ??'' }}">
+                                                                <input type="text" name="fname" id="first-name-column first-name-icon" class="form-control" placeholder="Enter First Name" value="{{ $user->fname ??'' }}">
                                                                 <div class="form-control-icon">
                                                                     <i class="bi bi-person"></i>
                                                                 </div>
@@ -79,7 +79,7 @@
                                                         <div class="form-group has-icon-left">
                                                             <label for="city-column">Last Name</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="lname" id="last-name-column first-name-icon" class="form-control" placeholder="Enter Last Name" name="city-column" value="{{ $user->lname ??'' }}">
+                                                                <input type="text" name="lname" id="last-name-column first-name-icon" class="form-control" placeholder="Enter Last Name" value="{{ $user->lname ??'' }}">
                                                                 <div class="form-control-icon">
                                                                     <i class="bi bi-person"></i>
                                                                 </div>
@@ -93,7 +93,7 @@
                                                         <div class="form-group has-icon-left">
                                                             <label for="email-id-column">Email</label>
                                                             <div class="position-relative">
-                                                                <input type="email" name="email" id="email-id-column first-name-icon" class="form-control" name="email-id-column" placeholder="Enter Email" value="{{ $user->email ??'' }}">
+                                                                <input type="email" name="email" id="email-id-column first-name-icon" class="form-control" placeholder="Enter Email" value="{{ $user->email ??'' }}">
                                                                 <div class="form-control-icon">
                                                                     <i class="bi bi-envelope"></i>
                                                                 </div>
@@ -107,7 +107,7 @@
                                                         <div class="form-group has-icon-left">
                                                             <label for="company-column">Password</label>
                                                             <div class="position-relative">
-                                                                <input type="password" name="password" id="password-column" class="form-control" name="company-column" placeholder="Enter Password">
+                                                                <input type="password" name="password" id="password-column" class="form-control" placeholder="Enter Password">
                                                                 <div class="form-control-icon">
                                                                     <i class="bi bi-lock"></i>
                                                                 </div>
