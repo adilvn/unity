@@ -1,0 +1,197 @@
+header .bottom-top-part{
+    display: block;
+  }
+  hr {
+    border-top: 1px solid #fff;
+    width: 50%;
+    margin: 16px auto;
+  }
+  .owner-profie-sec{
+    overflow-x: hidden;
+  }
+  #profile-box-content-sm {
+    display: none;
+    overflow-x: hidden;
+  }
+  #bottom-top-part-toggle{
+    display: none;
+  }
+.bottom-slider .swiper-container{
+    overflow-x: hidden;
+}
+#datatable-donation_wrapper .form-control,
+#datatable-donation_wrapper .form-select
+{ height: 38px; 
+
+}
+#datatable-donation_previous{
+  margin-right: 30px;
+}
+#datatable-donation_next{
+  margin-left: 10px;
+}
+.page-item.active .page-link {
+    background-color: #9dafbd;
+    border-color: #9dafbd;
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, 
+table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before{
+  background-color:black;
+}
+  @media (max-width: 1199.98px) { 
+    .profile-hero-section .profile-facilities {
+      max-width: 80%;
+    }
+  }
+  @media (max-width: 991.98px) { 
+    ul.product-list-part li {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .profile-hero-section .profile-facilities {
+      max-width: 90%;
+    }
+    .profile-box-content i.far.fa-smile{
+      padding: 0;
+    }
+    .sharing-quote{
+      padding: 45px 25px 20px;
+    }
+    .charity-des{
+      padding: 18px;
+    }
+    .sharing-quote h2,
+    .smile-content h2,
+    .smile-content h2 span{
+      font-size: 20px;
+    }
+    .home-section-2 a.category_box,
+    .home-section-2 .icon-box-wrap {
+      height: 100%;
+    }
+    .home-section-2 .icon-box-wrap {
+     padding: 60px 10px
+    }    
+    .heading-h2 h2 {
+      font-size: 32px;
+    }
+    footer.site-footer .btn-common a{
+      padding: 6px 18px ;
+    }
+    .profile_tab_wrapp .tab_body .tab-content {
+      padding: 50px 0;
+  }
+  #datatable-donation_length,
+  #datatable-donation_info{
+    margin-bottom: 8px;
+  }
+  }
+  @media (min-width:768px) and (max-width:991.98px){
+    .search_wrapp{
+      width: 80%;
+    }
+  }
+  @media (max-width: 767.98px) { 
+    #profile-box-content-lg{
+      display: none;
+    }
+    #profile-box-content-sm{
+      display: block;
+    }
+    #profile-box-content-sm a.say-thanks {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .profile-hero-section .left-profile{
+      flex-direction: column;
+      align-items: center;
+    }
+    .profile-hero-section .profile-facilities{
+      flex-wrap: nowrap;
+      max-width: 100%;
+    }
+    .profile-image, .profile-description{
+      text-align: center;
+    }
+    .profile-image{
+      margin-bottom: 16px;
+    }
+    .profile-description .unity-user-main{
+      padding-top: 15px;
+    }
+    .profile-hero-section img.author-avtar{
+      max-width: 75%;
+    }
+    .profile-box-content i.far.fa-smile {
+      padding-left: 10px;
+    }
+    .profile-description h3{
+      font-size: 28px;
+    }
+    .profile-box-content {
+      padding-top: 25px;
+    }
+    .sharing-quote{
+      margin-bottom: 16px;
+    }
+    .search_wrapp {
+      width: 100%;
+    }
+    .tab_body .tab-content {
+       padding: 50px 0; 
+  } 
+  .table.dataTable>tbody>tr.child span.dtr-title {
+    font-size: 22px;
+  }
+}
+  @media (max-width: 575.98px) { 
+  
+    .tab_body .tab-content{
+      padding: 50px 0;
+    }
+    header .bottom-top-part{
+      display: none;
+    }
+    #bottom-top-part-toggle{
+      display: block;
+    }
+    .store-content-wrap {
+      padding: 35px 10px;
+    }
+    .store-content-wrap .top-heading{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .store-content-wrap .top-heading .btn-common{
+      align-self: flex-end;
+    }
+    .store-content-wrap .top-heading h2{
+      margin-bottom: 8px;
+    }
+    .profile_tab_wrapp #myTab{
+      display: block;
+    }
+    .tab_head .nav-tabs .nav-link{
+      width: 100%;
+    }
+    .cta-btns .btn-common a{
+      padding: 8px 18px;
+    }
+    footer.site-footer{
+      padding: 50px 0;
+    }
+    .site-footer .footer-wrap h2{
+      margin-bottom: 14px;
+      margin-top: 16px;
+    }
+    .heading-h2 h2 {
+      font-size: 28px;
+    }
+    .profile-description h3{
+      font-size: 24px;
+    }
+    .profile-hero-section img.author-avtar {
+      max-width: 50%;
+  }
+  }
