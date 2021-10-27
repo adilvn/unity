@@ -58,9 +58,21 @@ Route::middleware('adminAuth')->group(function () {
 
     //Super Admin Routes
     Route::middleware('superAuth')->group(function () {
+        Route::get('/admin/create', [UserController::class, 'createAdmin'])->name('create-admin');
+        Route::post('/admin/store/admin', [UserController::class, 'storeAdmin'])->name('store-admin');
         Route::get('/admin/users/admins', [UserController::class, 'getAdmins'])->name('get-admins');
         Route::get('/admin/users/admins/status/{id}', [UserController::class, 'updateAdminStatus'])->name('admin-status-update');
-        Route::get('/admin/users/admins/edit/{id}', [UserController::class, 'editAdmin'])->name('admin-edit');
+        Route::get('/admin/users/admins/edit/{id}', [UserController::class, 'editAdmin'])->name('edit-admin');
+        Route::post('/admin/users/admins/update/{id}', [UserController::class, 'updateAdmin'])->name('update-admin');
+        Route::get('/admin/users/admins/delete/{id}', [UserController::class, 'deleteAdmin'])->name('delete-admin');
+
+        Route::get('admin/users/donators', [UserController::class, 'showDonators'])->name('show-donators');
+        Route::get('admin/users/donators/status/{id}', [UserController::class, 'updateDonatorStatus'])->name('donator-status-update');
+        Route::get('admin/users/donators/delete/{id}', [UserController::class, 'deleteDonator'])->name('delete-donator');
+
+        Route::get('admin/users/businesses', [UserController::class, 'showBusinesses'])->name('show-businesses');
+        Route::get('admin/users/businesses/status/{id}', [UserController::class, 'updateBusinessesStatus'])->name('businesses-status-update');
+        Route::get('admin/users/businesses/delete/{id}', [UserController::class, 'deleteBusinesses'])->name('delete-businesses');
     });
 });
 

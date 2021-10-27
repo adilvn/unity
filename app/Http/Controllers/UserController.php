@@ -171,6 +171,38 @@ class UserController extends Controller
         return redirect()->route('donator-profile');
     }
 
+    public function showDonators()
+    {
+        $users = User::where('user_type', 3)->get();
+        return view('admin.content.donators', compact('users'));
+    }
+
+    public function updateDonatorStatus($id)
+    {
+        $user = User::find($id);
+        if (!is_null($user)) {
+            if ($user->status == 0) {
+                $user->status = 1;
+                $user->save();
+                return redirect()->route('show-donators');
+            } else if ($user->status == 1) {
+                $user->status = 0;
+                $user->save();
+                return redirect()->route('show-donators');
+            }
+        } else {
+            return redirect()->route('show-donators');
+        }
+    }
+
+    public function deleteDonator(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        $request->session()->flash('donator-delete', 'Donator has been deleted!');
+        return redirect()->back();
+    }
+
 
     // Business
     public function createBusiness(Request $request)
@@ -292,6 +324,38 @@ class UserController extends Controller
         return view('business.content.payment-details');
     }
 
+    public function showBusinesses()
+    {
+        $users = User::where('user_type', 4)->get();
+        return view('admin.content.businesses', compact('users'));
+    }
+
+    public function updateBusinessesStatus($id)
+    {
+        $user = User::find($id);
+        if (!is_null($user)) {
+            if ($user->status == 0) {
+                $user->status = 1;
+                $user->save();
+                return redirect()->route('show-businesses');
+            } else if ($user->status == 1) {
+                $user->status = 0;
+                $user->save();
+                return redirect()->route('show-businesses');
+            }
+        } else {
+            return redirect()->route('show-businesses');
+        }
+    }
+
+    public function deleteBusinesses(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        $request->session()->flash('businesses-delete', 'Business User has been deleted!');
+        return redirect()->back();
+    }
+
 
 
 
@@ -327,6 +391,49 @@ class UserController extends Controller
         }
     }
 
+    public function createAdmin()
+    {
+        return view('admin.content.createAdmin');
+    }
+
+    public function storeAdmin(Request $request)
+    {
+        $request->validate(
+            [
+                'username' => 'required|unique:users,username',
+                'fname' => 'required',
+                'lname' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => ['required', Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()],
+            ],
+            [
+                'username.required' => 'Username is required*',
+                'fname.required' => 'First Name is required*',
+                'lname.required' => 'Last Name is required*',
+                'email.required' => 'Email is required*',
+                'password.required' => 'Password is required*',
+            ]
+        );
+
+        $user = User::create([
+            'username' => $request->username,
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_type' => 1,
+            'status' => 1,
+        ]);
+        $request->session()->flash('success', 'Admin created successfully!');
+        return redirect()->back();
+        // return response()->json(['success' => 'Created successfully!']);
+    }
+
 
     public function getAdmins()
     {
@@ -355,6 +462,32 @@ class UserController extends Controller
         } else {
             return redirect()->route('get-admins');
         }
+    }
+
+    public function editAdmin(Request $request, $id)
+    {
+        $user = User::find($id);
+        return view('admin.content.createAdmin', compact('user'));
+    }
+
+    public function updateAdmin(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->username = $request->username;
+        $user->fname = $request->fname;
+        $user->lname = $request->lname;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->fname);
+        $user->update();
+        return redirect()->back()->with('success', 'Updated Successfully!');
+    }
+
+    public function deleteAdmin(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        $request->session()->flash('admin-delete', 'Admin has been deleted!');
+        return redirect()->route('get-admins');
     }
 
     public function visitorLogin(Request $request)
