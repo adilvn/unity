@@ -1,5 +1,5 @@
 @extends('admin.layout.adminlayout')
-@section('title', 'Create FAQ')
+@section('title', 'Create Career')
 @section('content')
     <header class="mb-3">
         <a href="#" class="burger-btn d-block d-xl-none">
@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Create FAQ</h3>
-                    <p class="text-subtitle text-muted">For Admin To Create FAQ</p>
+                    <h3>Create Career</h3>
+                    <p class="text-subtitle text-muted">For Admin To Create Career</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('get-faqs') }}">FAQ's</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Create FAQ</li>
+                            <li class="breadcrumb-item"><a href="{{ route('get-careers') }}">Careers</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Career</li>
                         </ol>
                     </nav>
                 </div>
@@ -35,10 +35,10 @@
                                         <div class="card-content">
                                             <div class="card-body">
                                                 @php
-                                                    if (isset($faq) && $faq->id > 0) {
-                                                        $route = route('update-faq', ['id' => $faq->id]);
+                                                    if (isset($career) && $career->id > 0) {
+                                                        $route = route('update-career', ['id' => $career->id]);
                                                     } else {
-                                                        $route = route('save-faq');
+                                                        $route = route('save-career');
                                                     }
                                                 @endphp
                                                 <form class="form" action="{{ $route }}" method="POST">
@@ -46,18 +46,36 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label for="question">Question</label>
-                                                                    <input type="text" name="question" id="question-column first-name-icon" class="form-control" placeholder="Enter the question" value="{{ $faq->question ?? '' }}">
-                                                                    @error('question')
-                                                                        <span class="text-danger">{{ $message }}</span>
-                                                                    @enderror
+                                                                <label for="position">Position</label>
+                                                                <input type="text" name="position"
+                                                                    id="first-name-icon"
+                                                                    class="form-control" placeholder="Enter the career position"
+                                                                    value="{{ $career->position ?? '' }}">
+                                                                @error('position')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div class="form-group mb-3">
-                                                                <label for="answer" class="form-label">Answer</label>
-                                                                <textarea class="form-control" name="answer" id="" rows="3" placeholder="Enter the answer">{{ $faq->answer ?? '' }}</textarea>
-                                                                @error('answer')
+                                                            <div class="form-group">
+                                                                <label for="location">Location</label>
+                                                                <input type="text" name="location"
+                                                                    id="first-name-icon"
+                                                                    class="form-control" placeholder="Enter the location"
+                                                                    value="{{ $career->location ?? '' }}">
+                                                                @error('location')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="type">Type</label>
+                                                                <input type="text" name="type"
+                                                                    id="first-name-icon"
+                                                                    class="form-control" placeholder="Enter the type"
+                                                                    value="{{ $career->type ?? '' }}">
+                                                                @error('type')
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
@@ -83,13 +101,13 @@
 @section('bodyExtra')
     <script>
         $(function() {
-            @if (Session::has('save-faq'))
+            @if (Session::has('save-career'))
                 toastr.options = {
                 'timeOut': '3000',
                 'closeButton': true,
                 'progressBar': true,
                 }
-                toastr.success("{{ Session::get('save-faq') }}");
+                toastr.success("{{ Session::get('save-career') }}");
             @endif
         });
     </script>

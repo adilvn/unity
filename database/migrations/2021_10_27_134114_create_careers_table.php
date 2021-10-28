@@ -18,6 +18,7 @@ class CreateCareersTable extends Migration
             $table->string('position');
             $table->string('location');
             $table->string('type');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

@@ -53,7 +53,7 @@ Route::middleware('adminAuth')->group(function () {
     Route::get('/admin/career/add', [CareerController::class, 'addCareer'])->name('add-career');
     Route::post('/admin/career/save', [CareerController::class, 'saveCareer'])->name('save-career');
     Route::get('/admin/careers/edit/{id}', [CareerController::class, 'editCareers'])->name('edit-careers');
-    Route::post('/admin/careers/update/{id}', [CareerController::class, 'updateCareer'])->name('update-careers');
+    Route::post('/admin/careers/update/{id}', [CareerController::class, 'updateCareer'])->name('update-career');
     Route::get('/admin/career/status/{id}', [CareerController::class, 'updateCareerStatus'])->name('update-career-status');
     Route::get('/admin/career/delete/{id}', [CareerController::class, 'deleteCareer'])->name('delete-career');
 

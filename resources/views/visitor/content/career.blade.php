@@ -21,36 +21,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($careers as $career)
                     <tr>
-                        <td>Refugee Education Research Specialist</td>
-                        <td>New York</td>
-                        <td>Full Time</td>
+                        <td>{{ $career->position }}</td>
+                        <td>{{ $career->location }}</td>
+                        <td>{{ $career->type }}</td>
                         <td>
                             <div class="site-btn-2 btn-common">
                                 <a href="{{route('register-page')}}" class="w-100 text-center">Apply Now</a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Marketing Volunteer</td>
-                        <td>Cleveland</td>
-                        <td>Full Time</td>
-                        <td>
-                            <div class="site-btn-2 btn-common">
-                                <a href="{{route('register-page')}}" class="w-100 text-center">Apply Now</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Teacher Educator</td>
-                        <td>London</td>
-                        <td>Remote</td>
-                        <td>
-                            <div class="site-btn-2 btn-common">
-                                <a href="{{route('register-page')}}" class="w-100 text-center">Apply Now</a>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

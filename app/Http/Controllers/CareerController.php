@@ -14,7 +14,8 @@ class CareerController extends Controller
      */
     public function getCareers()
     {
-        //
+        $careers = Career::all();
+        return view('admin.content.career', compact('careers'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CareerController extends Controller
      */
     public function addCareer()
     {
-        //
+        return view('admin.content.career-new');
     }
 
     /**
@@ -35,7 +36,27 @@ class CareerController extends Controller
      */
     public function saveCareer(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'position' => 'required',
+                'location' => 'required',
+                'type' => 'required'
+            ],
+            [
+                'position.required' => 'Career position is required',
+                'location.required' => 'Location is required',
+                'type.required' => 'Type is required'
+            ]
+        );
+
+        $career = Career::create([
+            'position' => $request->position,
+            'location' => $request->location,
+            'type' => $request->type,
+            'status' => 1,
+        ]);
+        $request->session()->flash('save-career', 'Career created successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -44,9 +65,10 @@ class CareerController extends Controller
      * @param  \App\Models\Career  $career
      * @return \Illuminate\Http\Response
      */
-    public function editCareer(Career $career)
+    public function editCareers($id)
     {
-        //
+        $career = Career::find($id);
+        return view('admin.content.career-new', compact('career'));
     }
 
     /**
@@ -55,9 +77,29 @@ class CareerController extends Controller
      * @param  \App\Models\Career  $career
      * @return \Illuminate\Http\Response
      */
-    public function updateCareer(Career $career)
+    public function updateCareer(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'position' => 'required',
+                'location' => 'required',
+                'type' => 'required'
+            ],
+            [
+                'position.required' => 'Career position is required',
+                'location.required' => 'Location is required',
+                'type.required' => 'Type is required'
+            ]
+        );
+
+        $career = Career::find($id);
+        $career->position = $request->position;
+        $career->location = $request->location;
+        $career->type = $request->type;
+        $career->status = 1;
+        $career->update();
+
+        return redirect()->back();
     }
 
     /**
@@ -67,9 +109,22 @@ class CareerController extends Controller
      * @param  \App\Models\Career  $career
      * @return \Illuminate\Http\Response
      */
-    public function updateCareerStatus(Request $request, Career $career)
+    public function updateCareerStatus($id)
     {
-        //
+        $career = Career::find($id);
+        if (!is_null($career)) {
+            if ($career->status == 1) {
+                $career->status = 0;
+                $career->update();
+                return redirect()->route('get-careers');
+            } else if ($career->status == 0) {
+                $career->status = 1;
+                $career->update();
+                return redirect()->route('get-careers');
+            }
+        } else {
+            return redirect()->route('get-careers');
+        }
     }
 
     /**
@@ -78,8 +133,12 @@ class CareerController extends Controller
      * @param  \App\Models\Career  $career
      * @return \Illuminate\Http\Response
      */
-    public function deleteCareer(Career $career)
+    public function deleteCareer(Request $request, $id)
     {
-        //
+        $career = Career::find($id);
+        $career->delete();
+
+        $request->session()->flash('delete-career', 'Career has been deleted successfully!');
+        return redirect()->back();
     }
 }
