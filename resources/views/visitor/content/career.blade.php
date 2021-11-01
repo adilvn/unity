@@ -28,7 +28,7 @@
                         <td>{{ $career->type }}</td>
                         <td>
                             <div class="site-btn-2 btn-common">
-                                <a href="{{route('register-page')}}" class="w-100 text-center">Apply Now</a>
+                                <a href="{{route('contact')}}" class="w-100 text-center">Apply Now</a>
                             </div>
                         </td>
                     </tr>

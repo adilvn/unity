@@ -5,8 +5,10 @@ use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\About;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
@@ -65,6 +67,20 @@ Route::middleware('adminAuth')->group(function () {
     Route::post('/admin/faqs/update/{id}', [FaqsController::class, 'updateFaq'])->name('update-faq');
     Route::get('/admin/faqs/status/{id}', [FaqsController::class, 'updateFaqStatus'])->name('update-faq-status');
     Route::get('/admin/faqs/delete/{id}', [FaqsController::class, 'deleteFaq'])->name('delete-faq');
+
+    //Blogs
+    Route::get('/admin/blogs', [BlogController::class, 'getBlogs'])->name('get-blogs');
+    Route::get('/admin/blogs/add', [BlogController::class, 'addBlog'])->name('add-blog');
+    Route::post('/admin/blogs/save', [BlogController::class, 'saveBlog'])->name('save-blog');
+    Route::get('/admin/blogs/edit/{id}', [BlogController::class, 'editBlog'])->name('edit-blog');
+    Route::post('/admin/blogs/update/{id}', [BlogController::class, 'updateBlog'])->name('update-blog');
+    Route::get('/admin/blogs/status/{id}', [BlogController::class, 'updateBlogStatus'])->name('update-blog-status');
+    Route::get('/admin/blogs/delete/{id}', [BlogController::class, 'deleteBlog'])->name('delete-blog');
+
+    // Contact
+    Route::post('/contact/query/save', [ContactController::class, 'saveQuery'])->name('save-query');
+    Route::get('/admin/contact-us-queries', [ContactController::class, 'showContactQueries'])->name('contact-us-queries');
+    Route::get('/admin/contact-us-queries/delete/{id}', [ContactController::class, 'deleteQuery'])->name('delete-query');
 
     //Super Admin Routes
     Route::middleware('superAuth')->group(function () {

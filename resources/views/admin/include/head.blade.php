@@ -7,3 +7,4 @@
 <link rel="stylesheet" href="{{ asset('adminAssets/css/toastr.min.css')}}">
 <script src="{{ asset('adminAssets/js/jquery.min.js')}}"></script>
 <script src="{{ asset('adminAssets/js/toastr.min.js')}}"></script>
+

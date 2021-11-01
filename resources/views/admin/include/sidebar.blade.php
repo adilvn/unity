@@ -72,6 +72,35 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item  has-sub {{ request()->is('admin/blogs*') ? 'active' : ''}}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-text-fill"></i>
+                        <span>Blogs</span>
+                    </a>
+                    <ul class="submenu" style="display: {{ request()->is('admin/blogs*') ? 'block' : 'none'}};">
+                        <li class="submenu-item {{ request()->routeIs('get-blogs') ? 'active' : ''}}">
+                            <a href="{{route('get-blogs')}}">All Blogs</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('add-blog') ? 'active' : ''}}">
+                            <a href="{{route('add-blog')}}">Add New Blog</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item {{ request()->routeIs('contact-us-queries') ? 'active' : ''}}">
+                    <a href="{{ route('contact-us-queries') }}" class='sidebar-link'>
+                        <i class="bi bi-question-diamond-fill"></i>
+                        <span>Contact Us Queries</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{ request()->routeIs('contact-us-queries') ? 'active' : ''}}">
+                    <a href="{{ route('contact-us-queries') }}" class='sidebar-link'>
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>Update Contact Info</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item ">
                     <form action="{{route('admin-logout')}}" method="POST">
                         @csrf
