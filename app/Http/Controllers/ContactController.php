@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactInfo;
 use App\Models\ContactUsQueries;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,42 @@ class ContactController extends Controller
 
         $request->session()->flash('delete-query', 'Query has been deleted successfully!');
         return redirect()->back();
+    }
+
+    public function addContactInfo()
+    {
+        $contactInfo = ContactInfo::where('id', 1)->first();
+        return view('admin.content.contactInfo', compact('contactInfo'));
+    }
+
+    public function contactInfo(Request $request)
+    {
+        $request->validate([
+            'detail' => 'required|max:300',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+        ],
+        [
+            'detail.required' => 'Please enter brief detail',
+            'address.required' => 'Address is required',
+            'phone.required' => 'Phone number is required',
+            'email.required' => 'Email is required'
+        ]);
+
+        ContactInfo::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'brief_detail' => $request->detail,
+            'address' => $request->address,
+            'ph_no' => $request->phone,
+            'email' => $request->email,
+            'status' => 1,
+        ]);
+
+        $request->session()->flash('save-contact-info', 'Contact details updated successfully!');
+        return redirect()->back()->withInput();
     }
 
 }

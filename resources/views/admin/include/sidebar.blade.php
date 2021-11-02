@@ -94,8 +94,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->routeIs('contact-us-queries') ? 'active' : ''}}">
-                    <a href="{{ route('contact-us-queries') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('admin/update-contact-info*') ? 'active' : ''}}">
+                    <a href="{{ route('add-contact-info') }}" class='sidebar-link'>
                         <i class="bi bi-telephone-fill"></i>
                         <span>Update Contact Info</span>
                     </a>

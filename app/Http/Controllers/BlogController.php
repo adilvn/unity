@@ -28,7 +28,7 @@ class BlogController extends Controller
     {
         $request->validate(
             [
-                'img' => 'required|image|max:2048|mimes:jpg,png,jpeg,gif,svg',
+                'img' => 'required',
                 'title' => 'required',
                 'desc' => 'required',
                 'url' => 'required'
@@ -41,11 +41,31 @@ class BlogController extends Controller
             ]
         );
 
-        $blog = Blog::create([
+        $content = $request->desc;
+        $dom = new \DomDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $imageFile = $dom->getElementsByTagName('img');
+
+        foreach($imageFile as $item => $image){
+           $data = $image->getAttribute('src');
+           list($type, $data) = explode(';', $data);
+           list(, $data)      = explode(',', $data);
+           $imgeData = base64_decode($data);
+           $image_name= "/images/blog_images/desc_img/" . uniqid().$item.'.png';
+           $path = public_path() . $image_name;
+           file_put_contents($path, $imgeData);
+
+           $image->removeAttribute('src');
+           $image->setAttribute('src', $image_name);
+        }
+
+        $content = $dom->saveHTML();
+
+        Blog::create([
             $imageName = uniqid().request()->img->getClientOriginalExtension(),
             'image' => $request->$imageName,
             'title' => $request->title,
-            'description' => $request->desc,
+            'description' => $content,
             'url' => $request->url,
             'postedby' => Auth::user()->id,
             'status' => 1,

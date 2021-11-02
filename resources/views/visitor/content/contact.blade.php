@@ -7,11 +7,11 @@
                 <div class="col-md-5 mb-5 mb-md-0">
                     <div class="contact_left">
                         <h2 class="mb-3">Contact Us for any questions !</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu maximus ante, eget sollicitudin metus. Sed fringilla efficitur fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</p>
+                        <p>{{ $contactInfo->brief_detail }}</p>
                         <ul>
-                            <li><b>Visit Us:</b> 92 Bowery St., New York, NY 10013, USA</li>
-                            <li><b>Call Us:</b> <a href="tel:0123 456 789">0123 456 789</a></li>
-                            <li><b>Email Us:</b> <a href="mailto:contact@unity.com">contact@unity.com</a></li>
+                            <li><b>Visit Us:</b> {{ $contactInfo->address }}</li>
+                            <li><b>Call Us:</b> <a href="tel:0123 456 789">{{ $contactInfo->ph_no }}</a></li>
+                            <li><b>Email Us:</b> <a href="mailto:contact@unity.com">{{ $contactInfo->email }}</a></li>
                         </ul>
                     </div>
                 </div>

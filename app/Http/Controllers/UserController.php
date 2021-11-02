@@ -430,7 +430,7 @@ class UserController extends Controller
             'status' => 1,
         ]);
         $request->session()->flash('success', 'Admin created successfully!');
-        return redirect()->back();
+        return redirect()->back()->withInput();
         // return response()->json(['success' => 'Created successfully!']);
     }
 
@@ -472,6 +472,28 @@ class UserController extends Controller
 
     public function updateAdmin(Request $request, $id)
     {
+        $request->validate(
+            [
+                'username' => 'required|unique:users,username',
+                'fname' => 'required',
+                'lname' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => ['required', Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()],
+            ],
+            [
+                'username.required' => 'Username is required*',
+                'fname.required' => 'First Name is required*',
+                'lname.required' => 'Last Name is required*',
+                'email.required' => 'Email is required*',
+                'password.required' => 'Password is required*',
+            ]
+        );
+
         $user = User::find($id);
         $user->username = $request->username;
         $user->fname = $request->fname;

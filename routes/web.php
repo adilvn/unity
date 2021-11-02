@@ -16,6 +16,7 @@ use App\Http\Controllers\Product;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Models\ContactInfo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,6 +82,9 @@ Route::middleware('adminAuth')->group(function () {
     Route::post('/contact/query/save', [ContactController::class, 'saveQuery'])->name('save-query');
     Route::get('/admin/contact-us-queries', [ContactController::class, 'showContactQueries'])->name('contact-us-queries');
     Route::get('/admin/contact-us-queries/delete/{id}', [ContactController::class, 'deleteQuery'])->name('delete-query');
+    Route::get('/admin/update-contact-info/add', [ContactController::class, 'addContactInfo'])->name('add-contact-info');
+    Route::post('/admin/update-contact-info/save', [ContactController::class, 'contactInfo'])->name('save-contact-info');
+    Route::post('/admin/update-contact-info/update/{id}', [ContactController::class, 'contactInfo'])->name('update-contact-info');
 
     //Super Admin Routes
     Route::middleware('superAuth')->group(function () {
@@ -161,7 +165,8 @@ Route::get('/gestures/{cat}', [ProductController::class, 'getCatGestures'])->nam
 
 Route::get('/about', [About::class, 'index'])->name('about');
 Route::get('contact', function () {
-    return view('visitor.content.contact');
+    $contactInfo = ContactInfo::first();
+    return view('visitor.content.contact', compact('contactInfo'));
 })->name('contact');
 
 
