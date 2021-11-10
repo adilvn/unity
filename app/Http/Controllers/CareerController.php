@@ -99,7 +99,8 @@ class CareerController extends Controller
         $career->status = 1;
         $career->update();
 
-        return redirect()->back();
+        $request->session()->flash('update-career', 'Career updated successfully!');
+        return redirect()->route('get-careers');
     }
 
     /**

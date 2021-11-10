@@ -66,7 +66,8 @@ class FaqsController extends Controller
         $faq->status = 1;
         $faq->update();
 
-        return redirect()->back();
+        $request->session()->flash('update-faq', 'FAQ updated successfully!');
+        return redirect()->route('get-faqs');
     }
 
     public function updateFaqStatus($id)
@@ -98,7 +99,7 @@ class FaqsController extends Controller
 
     public function showFaqs()
     {
-        $faqs = faqs::where('status', 1)->get();
+        $faqs = faqs::where('status', 1)->orderBy('id', 'DESC')->get();
         $gallery = Gallery::where('status', 1)->get();
         return view('visitor.content.faqs', compact('faqs', 'gallery'));
     }

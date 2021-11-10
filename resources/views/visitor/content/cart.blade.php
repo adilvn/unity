@@ -39,7 +39,7 @@
                                         <div class="quantity">
                                             <div class="number">
                                                 <span class="minus" onclick=""><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                <input type="text" class="cart_qty" value="{{$item->qty}}" oninput="" name="cart_qty[]"/>
+                                                <input type="text" id="qty" class="cart_qty" value="{{$item->qty}}" oninput="" name="cart_qty[]"/>
                                                 <span class="plus" onclick=""><i class="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
                                         </div>
@@ -120,7 +120,12 @@
                 "closeButton": true,
                 "progressBar": true
             }
-            toastr.error("{{ Session::get('cart-remove-success') }}");
+            toastr.success("{{ Session::get('cart-remove-success') }}");
         @endif
+
+        $('#qty').change(function() {
+            var iqty = $('#qty').val();
+                alert(iqty);
+        });
     </script>
 @endsection

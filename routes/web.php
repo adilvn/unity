@@ -79,9 +79,6 @@ Route::middleware('adminAuth')->group(function () {
     Route::get('/admin/blogs/delete/{id}', [BlogController::class, 'deleteBlog'])->name('delete-blog');
 
     // Contact
-    Route::post('/contact/query/save', [ContactController::class, 'saveQuery'])->name('save-query');
-    Route::get('/admin/contact-us-queries', [ContactController::class, 'showContactQueries'])->name('contact-us-queries');
-    Route::get('/admin/contact-us-queries/delete/{id}', [ContactController::class, 'deleteQuery'])->name('delete-query');
     Route::get('/admin/update-contact-info/add', [ContactController::class, 'addContactInfo'])->name('add-contact-info');
     Route::post('/admin/update-contact-info/save', [ContactController::class, 'contactInfo'])->name('save-contact-info');
     Route::post('/admin/update-contact-info/update/{id}', [ContactController::class, 'contactInfo'])->name('update-contact-info');
@@ -148,6 +145,9 @@ Route::middleware('userNotLogin')->group(function () {
     Route::get('/login', function () {
         return view('visitor.content.login');
     })->name('login-page');
+    Route::get('/forgot-password', function() {
+        return view('visitor.content.forgot-password');
+    })->name('forgot-password');
 });
 
 
@@ -164,10 +164,10 @@ Route::get('/gestures/{cat}', [ProductController::class, 'getCatGestures'])->nam
 
 
 Route::get('/about', [About::class, 'index'])->name('about');
-Route::get('contact', function () {
-    $contactInfo = ContactInfo::first();
-    return view('visitor.content.contact', compact('contactInfo'));
-})->name('contact');
+Route::get('contact', [ContactController::class, 'contact'])->name('contact');
+Route::post('/contact/query/save', [ContactController::class, 'saveQuery'])->name('save-query');
+    Route::get('/admin/contact-us-queries', [ContactController::class, 'showContactQueries'])->name('contact-us-queries');
+    Route::get('/admin/contact-us-queries/delete/{id}', [ContactController::class, 'deleteQuery'])->name('delete-query');
 
 
 Route::post('/product/add-cart', [CartController::class, 'addCart'])->name('add-cart');

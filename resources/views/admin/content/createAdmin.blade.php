@@ -146,17 +146,3 @@
     </section>
 </div>
 @endsection
-@section('bodyExtra')
-<script>
-    $(function() {
-        @if(Session::has('success'))
-        toastr.options = {
-            'timeOut': '3000',
-            'closeButton': true,
-            'progressBar': true,
-        }
-        toastr.success("{{Session::get('success')}}");
-        @endif
-    });
-</script>
-@endsection

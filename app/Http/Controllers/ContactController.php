@@ -33,7 +33,7 @@ class ContactController extends Controller
             ],
             [
                 'name.required' => 'Tell us your name',
-                'email.required' => 'Email is Required',
+                'email.required' => 'Enter valid email',
                 'message.required' => 'Please write something',
             ]);
 
@@ -98,4 +98,9 @@ class ContactController extends Controller
         return redirect()->back()->withInput();
     }
 
+    public function contact()
+    {
+        $contactInfo = ContactInfo::first();
+        return view('visitor.content.contact', compact('contactInfo'));
+    }
 }

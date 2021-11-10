@@ -82,6 +82,15 @@
         }
         toastr.success("{{ Session::get('delete-faq') }}");
         @endif
+
+        @if (Session::has('update-faq'))
+                toastr.options = {
+                'timeOut': '3000',
+                'closeButton': true,
+                'progressBar': true,
+                }
+                toastr.success("{{ Session::get('update-faq') }}");
+            @endif
         });
     </script>
 @endsection

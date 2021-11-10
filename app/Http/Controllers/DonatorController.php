@@ -40,7 +40,7 @@ class DonatorController extends Controller
     public function getDonators()
     {
         # code...
-        $users = User::where('user_type', 3)->where('status', 1)->paginate(10);
+        $users = User::where('user_type', 2)->where('status', 1)->paginate(10);
         $gallery = Gallery::where('status', 1)->get();
         return view('visitor.content.donators', compact('users', 'gallery'));
     }

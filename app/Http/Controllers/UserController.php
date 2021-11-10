@@ -39,9 +39,9 @@ class UserController extends Controller
         $u_type = 0;
         if ($request->user_type == 1) {
             # code...
-            $u_type = 2;
+            $u_type = 4;
         } else {
-            $u_type = 3;
+            $u_type = 2;
         }
 
         if (User::where('email', '=', $request->email)->exists() || User::where('username', '=', "unity@" . $request->username)->exists()) {
@@ -173,7 +173,7 @@ class UserController extends Controller
 
     public function showDonators()
     {
-        $users = User::where('user_type', 3)->get();
+        $users = User::where('user_type', 2)->get();
         return view('admin.content.donators', compact('users'));
     }
 
@@ -242,7 +242,7 @@ class UserController extends Controller
                 'store_location' => $request->bstore_location,
                 'pcode' => $request->bpcode,
                 'country' => $request->bcountry,
-                'user_type' => 4,
+                'user_type' => 3,
                 'password' => Hash::make($request->bpassword),
                 'status' => 0,
             ]);
@@ -326,7 +326,7 @@ class UserController extends Controller
 
     public function showBusinesses()
     {
-        $users = User::where('user_type', 4)->get();
+        $users = User::where('user_type', 3)->get();
         return view('admin.content.businesses', compact('users'));
     }
 
@@ -430,7 +430,7 @@ class UserController extends Controller
             'status' => 1,
         ]);
         $request->session()->flash('success', 'Admin created successfully!');
-        return redirect()->back()->withInput();
+        return redirect()->route('get-admins');
         // return response()->json(['success' => 'Created successfully!']);
     }
 
@@ -524,11 +524,11 @@ class UserController extends Controller
                 # code...
                 if (Auth::user()->status == 1) {
                     # code...
-                    if (Auth::user()->user_type == 2) {
+                    if (Auth::user()->user_type == 4) {
                         $request->session()->flash('visitor-register-success', 'Welcome To Unity Dashboard');
                         return redirect()->route('home');
                     }
-                    if (Auth::user()->user_type == 3) {
+                    if (Auth::user()->user_type == 2) {
                         $request->session()->flash('donator-register-success', 'Welcome To Unity Dashboard');
                         $carts = Cart::where('mac', strtok(exec('getmac'), ' '))->where('user_id', -1)->get();
                         foreach ($carts as $cart) {
@@ -538,7 +538,7 @@ class UserController extends Controller
                         }
                         return redirect()->route('donator-profile');
                     }
-                    if (Auth::user()->user_type == 4) {
+                    if (Auth::user()->user_type == 3) {
                         $request->session()->flash('business-register-success', 'Welcome To Unity Dashboard');
                         return redirect()->route('business-profile');
                     }

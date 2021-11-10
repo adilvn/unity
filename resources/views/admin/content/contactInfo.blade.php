@@ -47,7 +47,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="position">Brief Detail</label>
-                                                                <textarea name="detail" class="form-control" id="" rows="3">{{ $contactInfo->brief_detail }}</textarea>
+                                                                <textarea name="detail" class="form-control" id="" rows="3">{{ $contactInfo->brief_detail ??'' }}</textarea>
                                                                 @error('detail')
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
@@ -57,7 +57,7 @@
                                                             <div class="form-group">
                                                                 <label for="location">Address</label>
                                                                 <input type="text" name="address"
-                                                                    class="form-control" placeholder="Enter the address" value="{{ $contactInfo->address }}">
+                                                                    class="form-control" placeholder="Enter the address" value="{{ $contactInfo->address ??'' }}">
                                                                 @error('address')
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
@@ -67,7 +67,7 @@
                                                             <div class="form-group">
                                                                 <label for="phone">Phone Number</label>
                                                                 <input type="text" name="phone"
-                                                                    class="form-control" placeholder="Enter the phone number" value="{{ $contactInfo->ph_no }}">
+                                                                    class="form-control" placeholder="Enter the phone number" value="{{ $contactInfo->ph_no ??'' }}">
                                                                 @error('phone')
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
@@ -77,7 +77,7 @@
                                                             <div class="form-group">
                                                                 <label for="phone">Email</label>
                                                                 <input type="text" name="email"
-                                                                    class="form-control" placeholder="Enter the email" value="{{ $contactInfo->email }}">
+                                                                    class="form-control" placeholder="Enter the email" value="{{ $contactInfo->email ??'' }}">
                                                                 @error('email')
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror

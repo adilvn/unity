@@ -10,15 +10,21 @@
                         <form action="{{route('user-login')}}" method="POST">
                             @csrf
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" name="email" value="{{old('name')}}" id="floatingInput" placeholder="user@unity.com">
+                                <input type="email" class="form-control" name="email" value="{{old('email')}}" id="floatingInput" placeholder="user@unity.com">
                                 <label for="floatingInput">Email Address</label>
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="password" class="form-control" name="password" value="{{old('password')}}" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="forgot_password text-end">
-                                <a href="#" class="d-inline-block">Forgot Password?</a>
+                                <a href="{{ route('forgot-password') }}" class="d-inline-block">Forgot Password?</a>
                             </div>
                             <div class="site-btn-4 btn-common text-center">
                             <button type="submit" class="w-100">Login</button>

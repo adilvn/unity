@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('order');
             $table->tinyInteger('p_id');
-            $table->tinyInteger('d_id');
-            $table->tinyInteger('b_id');
+            $table->tinyInteger('donator_id');
+            $table->tinyInteger('business_id');
             $table->tinyInteger('qty');
             $table->tinyInteger('is_confirm');
             $table->tinyInteger('status');

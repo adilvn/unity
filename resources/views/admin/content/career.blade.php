@@ -86,6 +86,14 @@
         }
         toastr.success("{{ Session::get('delete-career') }}");
         @endif
+        @if (Session::has('update-career'))
+            toastr.options = {
+                'timeOut': '3000',
+                'closeButton': true,
+                'progressBar': true
+            }
+        toastr.success("{{ Session::get('update-career') }}");
+        @endif
         });
     </script>
 @endsection

@@ -26,7 +26,7 @@
                                 <label for="quantity" class="d-block mb-2">Select Quantity</label>
                                 <div class="number">
                                     <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                    <input type="text" value="1" name="qty"/>
+                                    <input type="text" onchange="checkQty(this)" value="1" name="qty"/>
                                     <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -156,6 +156,22 @@
                 toastr.error("{{ Session::get('review-added-error') }}");
             @endif
         });
+
+        // Check quantity limit of the cart with available quantuty
+        function checkQty(qty) {
+            var iqty = $(qty).val();
+            var pqty = {{ $product->available_qty }};
+            if(iqty > pqty)
+            {
+                alert('The limit exceeded');
+                $("span.plus").hide();
+                $(qty).val(pqty);
+            }
+            else if(iqty <= pqty)
+            {
+                $("span.plus").show();
+            }
+        }
     </script>
 @endsection
 

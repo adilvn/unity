@@ -27,8 +27,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
+                                        <h6 class="text-muted font-semibold">Donations</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $donations }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -44,8 +44,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
+                                        <h6 class="text-muted font-semibold">Donators</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $donators }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -57,12 +57,12 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon green">
-                                            <i class="iconly-boldAdd-User"></i>
+                                            <i class="iconly-boldProfile"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
+                                        <h6 class="text-muted font-semibold">Businesses</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $businesses }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -74,12 +74,12 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon red">
-                                            <i class="iconly-boldBookmark"></i>
+                                            <i class="iconly-boldProfile"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
+                                        <h6 class="text-muted font-semibold">Vistors</h6>
+                                        <h6 class="font-extrabold mb-0">{{ $visitors }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -215,14 +215,14 @@
             </div>
             <div class="col-12 col-lg-3">
                 <div class="card">
-                    <div class="card-body py-4 px-5">
+                    <div class="card-body py-4">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                <img src="assets/images/faces/1.jpg" alt="Face 1">
+                                {{-- <img src="{{ asset('adminAssets/images/faces/1.jpg') }}" alt="Face 1"> --}}
                             </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">John Duck</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
+                            <div class="name">
+                                <h5 class="font-bold text-break">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</h5>
+                                <h6 class="text-muted mb-0">{{ Auth::user()->email }}</h6>
                             </div>
                         </div>
                     </div>

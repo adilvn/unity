@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -39,7 +40,11 @@ class adminLoginController extends Controller
     public function adminDashboard()
     {
         # code...
-        return view('admin.content.dashboard');
+        $donators = User::where('user_type', 2)->count();
+        $businesses = User::where('user_type', 3)->count();
+        $visitors = User::where('user_type', 4)->count();
+        $donations = Order::where('order')->count();
+        return view('admin.content.dashboard', compact('donators', 'businesses', 'visitors', 'donations'));
     }
 
     public function adminLogout()

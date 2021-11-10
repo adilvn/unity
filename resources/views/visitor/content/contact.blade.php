@@ -7,12 +7,14 @@
                 <div class="col-md-5 mb-5 mb-md-0">
                     <div class="contact_left">
                         <h2 class="mb-3">Contact Us for any questions !</h2>
+                        @if(isset($contactInfo))
                         <p>{{ $contactInfo->brief_detail }}</p>
                         <ul>
                             <li><b>Visit Us:</b> {{ $contactInfo->address }}</li>
-                            <li><b>Call Us:</b> <a href="tel:0123 456 789">{{ $contactInfo->ph_no }}</a></li>
-                            <li><b>Email Us:</b> <a href="mailto:contact@unity.com">{{ $contactInfo->email }}</a></li>
+                            <li><b>Call Us:</b> <a href="tel:{{ $contactInfo->ph_no }}">{{ $contactInfo->ph_no }}</a></li>
+                            <li><b>Email Us:</b> <a href="mailto:{{ $contactInfo->email }}">{{ $contactInfo->email }}</a></li>
                         </ul>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-7">

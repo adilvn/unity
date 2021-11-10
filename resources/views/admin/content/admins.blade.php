@@ -163,6 +163,15 @@
         }
         toastr.success("{{ Session::get('admin-delete') }}");
         @endif
+
+        @if(Session::has('success'))
+        toastr.options = {
+            'timeOut': '3000',
+            'closeButton': true,
+            'progressBar': true,
+        }
+        toastr.success("{{Session::get('success')}}");
+        @endif
     });
 </script>
 
