@@ -579,7 +579,13 @@ class UserController extends Controller
     public function forgotPassword(Request $request)
     {
         $users = User::where('email', $request->email)->first();
-        if ($users->user_type == 2 || $users->user_type == 3 || $users->user_type == 4) {
+        if ($users == null) {
+            $request->session()->flash('no-email-found', 'Email does not exist!');
+            return redirect()->route('forgot-password');
+        } elseif ($users->user_type == 0 || $users->user_type == 1) {
+            $request->session()->flash('alert-for-admins', 'You cannot reset your password!');
+            return redirect()->route('home');
+        } else {
             $request->validate(
                 [
                     'email' => 'required|email'
@@ -589,27 +595,40 @@ class UserController extends Controller
                 ]
             );
 
-            $user = User::where('email', $request->email)->first();
-            if ($user == null) {
-                $request->session()->flash('no-found', 'Email does not exist');
-                return redirect()->route('forgot-password');
-            } else {
                 $token = Str::random(64);
                 ResetPassword::create([
                     'email' => $request->email,
                     'token' => $token,
                 ]);
-            }
 
             Mail::send('visitor.content.email', ['token' => $token], function ($message) use ($request) {
                 $message->to($request->email);
                 $message->subject('Reset Password');
             });
 
+            $request->session()->flash('sent-mail', 'Email sent successfully!');
             return redirect()->route('forgot-password');
-        } else {
-            $request->session()->flash('invalid', 'You cannot reset your password!');
-            return redirect()->route('home');
         }
+    }
+
+    public function createPassword($token)
+    {
+        return view('visitor.content.new-password', compact('token'));
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => [
+                'required',
+                Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->letters()
+                ->symbols()
+                ->uncompromised()
+            ],
+            'cpassword' => 'required|same:password'
+        ]);
     }
 }

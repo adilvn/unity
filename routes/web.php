@@ -148,10 +148,9 @@ Route::middleware('userNotLogin')->group(function () {
     Route::get('/forgot-password', function() {
         return view('visitor.content.forgot-password');
     })->name('forgot-password');
-    Route::get('otp/verification', function () {
-        return view('visitor.content.otp');
-    })->name('otp');
     Route::post('/forgot', [UserController::class, 'forgotPassword'])->name('forgot');
+    Route::get('/create-new-password', [UserController::class, 'createPassword'])->name('create-new-password');
+    Route::post('/change-password', [UserController::class, 'changePassword'])->name('change-password');
 });
 
 

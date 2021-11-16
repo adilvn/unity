@@ -32,13 +32,22 @@
 @section('bodyExtra')
     <script>
         $(function() {
-            @if (Session::has('no-found'))
+            @if (Session::has('sent-mail'))
                 toastr.options =
                 {
                     "timeOut": "3000",
                     "closeButton": true,
                 }
-                toastr.error("{{ Session::get('no-found') }}");
+                toastr.success("{{ Session::get('sent-mail') }}");
+            @endif
+
+            @if (Session::has('no-email-found'))
+                toastr.options =
+                {
+                    "timeOut": "3000",
+                    "closeButton": true,
+                }
+                toastr.error("{{ Session::get('no-email-found') }}");
             @endif
         });
     </script>

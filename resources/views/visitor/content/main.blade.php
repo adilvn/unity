@@ -141,6 +141,16 @@
                 }
                 toastr.success("{{ Session::get('visitor-register-success') }}");
             @endif
+
+            @if (Session::has('alert-for-admins'))
+                toastr.options =
+                {
+                    "timeOut": "3000",
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.error("{{ Session::get('alert-for-admins') }}");
+            @endif
         });
     </script>
 @endsection
