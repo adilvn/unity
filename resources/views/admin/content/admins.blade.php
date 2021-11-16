@@ -172,6 +172,15 @@
         }
         toastr.success("{{Session::get('success')}}");
         @endif
+
+        @if(Session::has('update-admin'))
+        toastr.options = {
+            'timeOut': '3000',
+            'closeButton': true,
+            'progressBar': true,
+        }
+        toastr.success("{{Session::get('update-admin')}}");
+        @endif
     });
 </script>
 

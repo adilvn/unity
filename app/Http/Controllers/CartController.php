@@ -62,7 +62,7 @@ class CartController extends Controller
                 if ($count > $item->qty) {
                     # code...
                     $item->qty = $count;
-                    $cart_products[$key] = $item;
+                    $cart_products[$key] = $item;   
                     $check_null = 1;
                 }
                 else{

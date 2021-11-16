@@ -38,8 +38,10 @@
                                     <td>
                                         <div class="quantity">
                                             <div class="number">
+                                                <input type="text" value="{{ $item->product->available_qty }}" id="product_qty{{ $key }}" hidden>
+                                                <input type="text" name="" id="avail_qty" hidden>
                                                 <span class="minus" onclick=""><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                <input type="text" id="qty" class="cart_qty" value="{{$item->qty}}" oninput="" name="cart_qty[]"/>
+                                                <input type="text" onchange="checkQty(this)" class="cart_qty" value="{{$item->qty}}" name="cart_qty[]"/>
                                                 <span class="plus" onclick=""><i class="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
                                         </div>
@@ -123,9 +125,18 @@
             toastr.success("{{ Session::get('cart-remove-success') }}");
         @endif
 
-        $('#qty').change(function() {
-            var iqty = $('#qty').val();
-                alert(iqty);
-        });
+        // function checkQty(quantity) {
+        //     var input_qty = $(quantity).val();
+        //     var product_qty = $(quantity).prev().prev().val();
+        //     if(input_qty > product_qty)
+        //     {
+        //         alert('The limit exceeded');
+        //         $(product_qty).next().hide();
+        //     }
+        //     else
+        //     {
+        //         $(product_qty).next().hide();
+        //     }
+        };
     </script>
 @endsection

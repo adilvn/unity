@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\ResetPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -474,10 +477,10 @@ class UserController extends Controller
     {
         $request->validate(
             [
-                'username' => 'required|unique:users,username',
+                'username' => 'required',
                 'fname' => 'required',
                 'lname' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email|',
                 'password' => ['required', Password::min(8)
                     ->letters()
                     ->mixedCase()
@@ -501,7 +504,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->fname);
         $user->update();
-        return redirect()->back()->with('success', 'Updated Successfully!');
+
+        $request->session()->flash('update-admin', 'Updated Successfully!');
+        return redirect()->route('get-admins');
     }
 
     public function deleteAdmin(Request $request, $id)
@@ -569,5 +574,42 @@ class UserController extends Controller
         # code...
         Auth::logout();
         return redirect(route('home'));
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $users = User::where('email', $request->email)->first();
+        if ($users->user_type == 2 || $users->user_type == 3 || $users->user_type == 4) {
+            $request->validate(
+                [
+                    'email' => 'required|email'
+                ],
+                [
+                    'email.required' => 'Please enter the valid email!'
+                ]
+            );
+
+            $user = User::where('email', $request->email)->first();
+            if ($user == null) {
+                $request->session()->flash('no-found', 'Email does not exist');
+                return redirect()->route('forgot-password');
+            } else {
+                $token = Str::random(64);
+                ResetPassword::create([
+                    'email' => $request->email,
+                    'token' => $token,
+                ]);
+            }
+
+            Mail::send('visitor.content.email', ['token' => $token], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Reset Password');
+            });
+
+            return redirect()->route('forgot-password');
+        } else {
+            $request->session()->flash('invalid', 'You cannot reset your password!');
+            return redirect()->route('home');
+        }
     }
 }
